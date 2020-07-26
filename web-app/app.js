@@ -1,34 +1,34 @@
 const products = []
 
 const filters = {
-    searchItem: ''
+    searchItem : ''
 }
 
-const renderProducts = function(products, filters) {
-    const filteredProducts = products.filter(function(item) {
+const renderProducts = function (products, filters) {
+    const filteredProducts = products.filter(function(item){
         return item.title.toLowerCase().includes(filters.searchItem.toLowerCase())
-    })
+    }) 
     document.querySelector('#products').innerHTML = ''
-    filteredProducts.forEach(function(item) {
+    filteredProducts.forEach(function(item){
         const productEl = document.createElement('p')
         productEl.textContent = item.title
         document.querySelector('#products').appendChild(productEl)
     })
 }
 
-renderProducts(products, filters)
+renderProducts (products, filters)
 
-document.querySelector('#search-products').addEventListener('input', function(e) {
-    filters.searchItem = e.target.value
+document.querySelector('#search-products').addEventListener('input', function(event){
+    filters.searchItem = event.target.value
     renderProducts(products, filters)
 })
 
-document.querySelector('#add-product-form').addEventListener('submit', function(e) {
-    e.preventDefault()
+document.querySelector('#add-prodcut-form').addEventListener('submit', function(event){
+    event.preventDefault()
     products.push({
-        title: e.target.elements.productTitle.value,
-        exists: true
+        title : event.target.elements.productTitle.value,
+        exist : true
     })
     renderProducts(products, filters)
-    e.target.elements.productTitle.value = ''
+    event.target.elements.productTitle.value = ''
 })
