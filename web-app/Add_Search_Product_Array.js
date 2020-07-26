@@ -4,6 +4,7 @@ const filters = {
     searchItem: ''
 }
 
+// Search item 
 const renderProducts = function(products, filters) {
     const filteredProducts = products.filter(function(item) {
         return item.title.toLowerCase().includes(filters.searchItem.toLowerCase())
@@ -18,11 +19,13 @@ const renderProducts = function(products, filters) {
 
 renderProducts(products, filters)
 
+// Read search item
 document.querySelector('#search-products').addEventListener('input', function(e) {
     filters.searchItem = e.target.value
     renderProducts(products, filters)
 })
 
+// Add item to array
 document.querySelector('#add-product-form').addEventListener('submit', function(e) {
     e.preventDefault()
     products.push({
