@@ -1,34 +1,62 @@
 const products = []
 
 const filters = {
-    searchItem : ''
+    searchItem: ''
 }
 
-const renderProducts = function (products, filters) {
-    const filteredProducts = products.filter(function(item){
-        return item.title.toLowerCase().includes(filters.searchItem.toLowerCase())
-    }) 
+
+const availableProducts = function(products) {
+    const existProduct = products.filter(function(item){
+        return item.exist === 'true'
+    })
+    //console.log(existProduct)
     document.querySelector('#products').innerHTML = ''
-    filteredProducts.forEach(function(item){
+    existProduct.forEach(function(item){
+        const productEl2 = document.createElement('p')
+        productEl2.textContent = item.title
+        document.querySelector('#products').appendChild(productEl2)
+    })
+}
+
+// Search item 
+const renderProducts = function(products, filters) {
+    const filteredProducts = products.filter(function(item) {
+        return item.title.toLowerCase().includes(filters.searchItem.toLowerCase())
+    })
+    document.querySelector('#products').innerHTML = ''
+    filteredProducts.forEach(function(item) {
         const productEl = document.createElement('p')
         productEl.textContent = item.title
         document.querySelector('#products').appendChild(productEl)
     })
 }
 
-renderProducts (products, filters)
 
-document.querySelector('#search-products').addEventListener('input', function(event){
-    filters.searchItem = event.target.value
+renderProducts(products, filters)
+
+// Read search item
+document.querySelector('#search-products').addEventListener('input', function(e) {
+    filters.searchItem = e.target.value
     renderProducts(products, filters)
 })
 
-document.querySelector('#add-prodcut-form').addEventListener('submit', function(event){
-    event.preventDefault()
+//available Products
+document.querySelector('#availabe-products').addEventListener('change', function(event){
+    if (event.target.checkbox = true) {
+        availableProducts(products)
+    } else {
+        document.querySelector('#products').innerHTML = ''
+    } 
+})
+
+// Add item to array
+document.querySelector('#add-product-form').addEventListener('submit', function(e) {
+    e.preventDefault()
     products.push({
-        title : event.target.elements.productTitle.value,
-        exist : true
+        title: e.target.elements.productTitle.value,
+        exist: e.target.elements.productExist.value
     })
     renderProducts(products, filters)
-    event.target.elements.productTitle.value = ''
+    e.target.elements.productTitle.value = ''
+    e.target.elements.productExist.value = ''
 })
