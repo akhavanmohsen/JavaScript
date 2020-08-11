@@ -7,14 +7,16 @@
     <body>
         <h1>Book Store</h1>
         <input type="text" id="search-products" placeholder="Search...">
-        <input type="checkbox" id="availabe-products">Show available products 
+        <label>
+            <input type="checkbox" id="available-products"> Available Products
+        </label>
         <div id="products"></div>
         <form id="add-product-form">
-            <input type="text" name="productTitle" placeholder="Add Product..."><br>
-            <input type="text" name="productExist" placeholder="True or False"><br>
+            <input type="text" name="productTitle" placeholder="Add Product...">
             <button>Add Product</button>
         </form>
 
+        <script src='functions.js'></script>
         <script src='app.js'></script>
     </body>
 </html>
